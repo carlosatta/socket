@@ -64,6 +64,10 @@ exports.init = function (compound) {
     });
 
     io.sockets.on('connection', function (socket) {
+        var query = socket.handshake.query;
+        if(query.sessionID){
+            socket.handshake.sessionID = query.sessionID;
+        }
         console.log(socket.handshake.sessionID);
         var hs = socket.handshake;
         console.log('A socket with userId ' + hs.sessionID + ' connected!');
